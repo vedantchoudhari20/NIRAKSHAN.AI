@@ -9099,8 +9099,13 @@
       id="wpforms-modern-js"
     ></script>
     
-  <!-- Custom Chatbot Widget -->
+  
+
+  <script src="../wp-content/custom-widgets.js"></script>
+
+  <!-- Advanced Chatbot Widget -->
   <div id="chatbot-widget">
+    <div id="chatbot-badge">1</div>
     <div id="chatbot-button" onclick="toggleChat()">
       <svg viewBox="0 0 24 24">
         <path d="M20,2H4C2.9,2,2,2.9,2,4v18l4-4h14c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M20,16H5.2L4,17.2V4h16V16z" />
@@ -9108,109 +9113,39 @@
     </div>
     <div id="chatbot-window">
       <header>
-        <span>AI.Parenting</span>
-        <span onclick="toggleChat()" style="cursor:pointer">×</span>
+        <span><span class="status-dot"></span>AI.Parenting</span>
+        <span onclick="toggleChat()" style="cursor:pointer; font-size: 24px;">&times;</span>
       </header>
       <div id="chat-messages">
-        <div class="message bot-msg">Hello! I'm your AI.Parenting assistant. How can I help you regarding our preschool
-          today?
-        </div>
+        <div class="message bot-msg">Hello! I'm your AI.Parenting assistant at The Nurturing Roots. How can I help you today?</div>
+      </div>
+      <div id="typing-indicator" class="typing" style="padding: 0 20px; font-style: italic; font-size: 12px; color: #b2bec3; display: none;">AI is typing...</div>
+      <div id="chat-suggestions">
+        <button onclick="handleSuggest('Admission')">Admission</button>
+        <button onclick="handleSuggest('Fees')">Fees</button>
+        <button onclick="handleSuggest('Programs')">Programs</button>
+        <button onclick="handleSuggest('Locations')">Locations</button>
       </div>
       <div id="chat-input-area">
-        <input type="text" id="chat-input" placeholder="Type a message...">
-        <button onclick="sendMessage()"
-          style="background:none; border:none; color:#6c5ce7; font-weight:bold; cursor:pointer">Send</button>
+        <input type="text" id="chat-input" placeholder="Ask something...">
+        <button onclick="sendMessage()" style="background:none; border:none; color:#6c5ce7; font-weight:bold; cursor:pointer">Send</button>
       </div>
+    </div>
+    <div id="chatbot-intro">
+      <span onclick="this.parentElement.style.display='none'" style="position:absolute; top:5px; right:10px; cursor:pointer">&times;</span>
+      Hi! I'm AI.Parenting. Have any questions? <span style="color:#6c5ce7; cursor:pointer; font-weight:bold" onclick="toggleChat()">Chat with me</span>
     </div>
   </div>
 
   <!-- Float Enquiry Button -->
   <div id="float-enquiry" onclick="openEnquiry()">Enquire Now</div>
 
-    <script type="text/javascript">
-      /* <![CDATA[ */
-      var wpforms_settings = {
-        val_required: "This field is required.",
-        val_email: "Please enter a valid email address.",
-        val_email_suggestion: "Did you mean {suggestion}?",
-        val_email_suggestion_title: "Click to accept this suggestion.",
-        val_email_restricted: "This email address is not allowed.",
-        val_number: "Please enter a valid number.",
-        val_number_positive: "Please enter a valid positive number.",
-        val_confirm: "Field values do not match.",
-        val_checklimit:
-          "You have exceeded the number of allowed selections: {#}.",
-        val_limit_characters: "{count} of {limit} max characters.",
-        val_limit_words: "{count} of {limit} max words.",
-        val_recaptcha_fail_msg:
-          "Google reCAPTCHA verification failed, please try again later.",
-        val_turnstile_fail_msg:
-          "Cloudflare Turnstile verification failed, please try again later.",
-        val_inputmask_incomplete:
-          "Please fill out the field in required format.",
-        uuid_cookie: "",
-        locale: "en",
-        wpforms_plugin_url:
-          "https:\/\/thenurturingroots.com\/wp-content\/plugins\/wpforms-lite\/",
-        gdpr: "",
-        ajaxurl: "https:\/\/thenurturingroots.com\/wp-admin\/admin-ajax.php",
-        mailcheck_enabled: "1",
-        mailcheck_domains: [],
-        mailcheck_toplevel_domains: ["dev"],
-        is_ssl: "1",
-        page_title: "Contact Us",
-        page_id: "209",
-        currency_code: "USD",
-        currency_thousands: ",",
-        currency_decimals: "2",
-        currency_decimal: ".",
-        currency_symbol: "$",
-        currency_symbol_pos: "left",
-        css_vars: [
-          "field-border-radius",
-          "field-background-color",
-          "field-border-color",
-          "field-text-color",
-          "label-color",
-          "label-sublabel-color",
-          "label-error-color",
-          "button-border-radius",
-          "button-background-color",
-          "button-text-color",
-          "field-size-input-height",
-          "field-size-input-spacing",
-          "field-size-font-size",
-          "field-size-line-height",
-          "field-size-padding-h",
-          "field-size-checkbox-size",
-          "field-size-sublabel-spacing",
-          "field-size-icon-size",
-          "label-size-font-size",
-          "label-size-line-height",
-          "label-size-sublabel-font-size",
-          "label-size-sublabel-line-height",
-          "button-size-font-size",
-          "button-size-height",
-          "button-size-padding-h",
-          "button-size-margin-top",
-        ],
-        isModernMarkupEnabled: "1",
-        formErrorMessagePrefix: "Form error message",
-        errorMessagePrefix: "Error message",
-        submitBtnDisabled: "Submit button is disabled during form submission.",
-      };
-      /* ]]> */
-    </script>
-  
-
-  
-
   <!-- Enquiry Modal -->
   <div id="enquiry-modal">
     <div id="enquiry-form-container">
-      <span class="close-modal" onclick="closeEnquiry()">×</span>
-      <h2>Enquire Now</h2>
-      <p>Please fill out the form below and we will get back to you.</p>
+      <span class="close-modal" onclick="closeEnquiry()">&times;</span>
+      <h2 style="font-family: inherit; color: #6c5ce7;">Admission Enquiry</h2>
+      <p style="text-align: center; margin-bottom: 20px;">Fill the form below and we'll connect with you.</p>
       <form onsubmit="submitEnquiry(event)">
         <label>Child's Name</label>
         <input type="text" name="child_name" required>
@@ -9221,36 +9156,31 @@
         <label>Phone Number</label>
         <input type="tel" name="phone" required>
 
-        <label>Centre</label>
+        <label>Select Centre</label>
         <select name="centre" required>
           <option value="">Select Centre</option>
-          <option>Nerul West</option>
-          <option>Nerul East</option>
-          <option>Pune (Marunji)</option>
+          <option>Nerul West, Navi Mumbai</option>
+          <option>Nerul East, Navi Mumbai</option>
+          <option>Marunji, Pune</option>
           <option>Pune (Wakad)</option>
           <option>Ulwe</option>
           <option>Uran City</option>
-          <option>Pune (Wakad)</option>
         </select>
 
         <label>Interested Program</label>
         <select name="program">
-          <option>Little Explorers (Playgroup)</option>
-          <option>Curious Cubs (Nursery)</option>
-          <option>Creative Crawlers</option>
-          <option>Adventurous Aces</option>
+          <option>Playgroup</option>
+          <option>Nursery</option>
+          <option>LKG</option>
+          <option>UKG</option>
+          <option>Daycare</option>
         </select>
 
-        <label>Your Message</label>
-        <textarea name="message" rows="3"></textarea>
-
-        <button type="submit" class="submit-btn" style="background:#6c5ce7; font-family: inherit;">Submit
-          Enquiry</button>
+        <button type="submit" class="submit-btn" style="background:#6c5ce7; color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 20px;">Submit Enquiry</button>
       </form>
     </div>
   </div>
 
-  <script src="../wp-content/custom-widgets.js"></script>
 
   <!-- Force Visible Script -->
   <script>
