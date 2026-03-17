@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nurturing Roots - Control Panel</title>
+    <style>
+        @font-face {
+            font-family: "dolpino";
+            src: url("images/Dolpino.ttf") format("truetype");
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: "dolpino", sans-serif;
+            font-size: 3.5rem;
+            color: #2d3436;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        p {
+            color: #636e72;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: #6c5ce7;
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #a29bfe;
+        }
+
+        .tips {
+            margin-top: 3rem;
+            text-align: left;
+            background: #f1f2f6;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: #2f3542;
+        }
+
+        .tips h3 {
+            margin-top: 0;
+            color: #57606f;
+            border-bottom: 2px solid #dfe4ea;
+            padding-bottom: 0.5rem;
+        }
+
+        code {
+            background: #dfe4ea;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+    </style>
+    <link rel="stylesheet" href="./deploy/wp-content/custom-widgets.css" />
+
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>The Nurturing Roots</h1>
+        <p>Your local environment is ready. Use the links below to navigate through the site structure.</p>
+
+        <div class="links">
+            <a href="./deploy/index.html" class="btn btn-primary">🚀 Launch Full Site (Launch Ready)</a>
+            <a href="http://localhost:3000" target="_blank" class="btn btn-primary">🌐 View Local Server (3000)</a>
+        </div>
+
+
+        <div class="tips">
+            <h3>🛠️ Developer Quick Tips</h3>
+            <p><strong>Font Applied:</strong> The header above uses the <code>Dolpino</code> font which I successfully
+                localized for you.</p>
+            <p><strong>Image Resolutions:</strong> To find the required resolution for a placeholder:</p>
+            <ul>
+                <li>Right-click any image in the browser and select <code>Inspect</code>.</li>
+                <li>Look at the <code>Natural Size</code> displayed in the tooltip or the <code>Computed</code> tab in
+                    dev tools.</li>
+                <li>Most hero banners are <code>1920x1080</code>, while secondary images are around
+                    <code>800x600</code>.
+                </li>
+            </ul>
+            <p><strong>Redirecting Gateways:</strong> You can add more links to this file by editing
+                <code>index.html</code> in the root folder.
+            </p>
+        </div>
+    </div>
+
+    <!-- Custom Chatbot Widget -->
+    <div id="chatbot-widget">
+        <div id="chatbot-button" onclick="toggleChat()">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M20,2H4C2.9,2,2,2.9,2,4v18l4-4h14c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M20,16H5.2L4,17.2V4h16V16z" />
+            </svg>
+        </div>
+        <div id="chatbot-window">
+            <header>
+                <span>AI.Parenting</span>
+                <span onclick="toggleChat()" style="cursor:pointer">×</span>
+            </header>
+            <div id="chat-messages">
+                <div class="message bot-msg">Hello! I'm your AI.Parenting assistant. How can I help you regarding our
+                    preschool
+                    today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button onclick="sendMessage()"
+                    style="background:none; border:none; color:#6c5ce7; font-weight:bold; cursor:pointer">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Float Enquiry Button -->
+    <div id="float-enquiry" onclick="openEnquiry()">Enquire Now</div>
+
+    <!-- Enquiry Modal -->
+    <div id="enquiry-modal">
+        <div id="enquiry-form-container">
+            <span class="close-modal" onclick="closeEnquiry()">×</span>
+            <h2>Enquire Now</h2>
+            <p>Please fill out the form below and we will get back to you.</p>
+            <form onsubmit="submitEnquiry(event)">
+                <label>Child's Name</label>
+                <input type="text" name="child_name" required>
+
+                <label>Parent's Name</label>
+                <input type="text" name="parent_name" required>
+
+                <label>Phone Number</label>
+                <input type="tel" name="phone" required>
+
+                <label>Centre</label>
+                <select name="centre" required>
+                    <option value="">Select Centre</option>
+                    <option>Nerul West</option>
+                    <option>Nerul East</option>
+                    <option>Pune (Marunji)</option>
+                    <option>Pune (Wakad)</option>
+                    <option>Ulwe</option>
+                    <option>Uran City</option>
+                </select>
+
+                <label>Interested Program</label>
+                <select name="program">
+                    <option>Little Explorers (Playgroup)</option>
+                    <option>Curious Cubs (Nursery)</option>
+                    <option>Creative Crawlers</option>
+                    <option>Adventurous Aces</option>
+                </select>
+
+                <label>Your Message</label>
+                <textarea name="message" rows="3"></textarea>
+
+                <button type="submit" class="submit-btn" style="background:#6c5ce7; font-family: inherit;">Submit
+                    Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./deploy/wp-content/custom-widgets.js"></script>
+
+
+</body>
+
+</html>

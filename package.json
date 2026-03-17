@@ -1,0 +1,10 @@
+{
+  "name": "thenurturingroots-local",
+  "version": "1.0.0",
+  "description": "Local version of The Nurturing Roots website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
